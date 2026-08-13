@@ -1,0 +1,15 @@
+Frontend validation status
+
+Applied fixes for the previous TypeScript/ESLint findings:
+- AssistantChat conversation ID uses a lazy React state initializer.
+- Dashboard favorites avoid synchronous setState inside the effect and use explicit dependencies.
+- App session effect reads the current pathname directly instead of capturing path without a dependency.
+- MotionSystem exposes ScrollReveal.sync through a typed intersection because the installed type definition does not declare sync.
+- NotFound Anime.js cleanup and stagger implementation retained.
+
+The local machine should run:
+  npm install
+  npm run check
+  npm run build
+
+This package was not build-verified in the generation environment because dependency installation could not complete there.

@@ -1,0 +1,246 @@
+@import "./tokens.css";
+@import "./animations.css";
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(45, 212, 199, 0.70) #0B1220;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #0B1220;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #2DD4C7, #FF6B5B);
+  border: 2px solid #0B1220;
+  border-radius: 999px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #5EEAD4, #FF8A7D);
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
+  min-width: 320px;
+  min-height: 100%;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--font-body);
+  font-size: 16px;
+  background: var(--color-night);
+  color: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  max-width: 100%;
+}
+
+::selection {
+  background: var(--color-teal);
+  color: #071015;
+}
+
+:focus-visible {
+  outline: 3px solid rgba(94, 234, 212, 0.85);
+  outline-offset: 3px;
+}
+
+.page-entrance {
+  animation: page-rise-in 720ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.letter-drop {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: inherit;
+}
+
+.letter-drop span {
+  display: inline;
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
+.text-shimmer {
+  color: var(--color-white);
+  background: linear-gradient(110deg, var(--color-white) 20%, var(--color-teal-light) 45%, var(--color-white) 70%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: text-shimmer 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 1200ms !important;
+    transition-duration: 160ms !important;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE FOUNDATION V6
+========================================================= */
+
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: clip;
+}
+
+body {
+  min-height: 100dvh;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  max-width: 100%;
+}
+
+.page-back-button {
+  min-height: 42px;
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #FFFFFF; 
+  background: #0D9488;
+  border: 1px solid var(--border-light);
+  border-radius: 999px;
+  border-color: #0D9488;
+  font-size: 14px;
+  font-weight: 750;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    color var(--transition-fast),
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.page-back-button span:first-child {
+  font-size: 18px;
+  line-height: 1;
+  transition: transform var(--transition-fast);
+}
+
+.page-back-button:hover {
+  color: var(--color-white);
+  background: #0F766E;
+  border-color: rgba(45, 212, 199, 0.45);
+  transform: translateX(-2px);
+  box-shadow: 0 12px 28px rgba(5, 10, 18, 0.18);
+}
+
+.page-back-button:hover span:first-child {
+  transform: translateX(-3px);
+}
+
+.page-back-button:active {
+  transform: translateX(0) scale(0.98);
+}
+
+.landing-brand-button,
+.dashboard-brand-button,
+.dashboard-mobile-brand-button,
+.management-brand,
+.support-brand {
+  font: inherit;
+  border: 0;
+  cursor: pointer;
+}
+
+.landing-brand-button,
+.dashboard-brand-button,
+.dashboard-mobile-brand-button {
+  background: transparent;
+}
+
+@media (min-width: 1600px) {
+  .landing-navigation,
+  .landing-hero,
+  .agent-selection-header,
+  .agent-selection-content {
+    width: min(1480px, calc(100% - 120px));
+  }
+
+  .landing-hero h1 {
+    font-size: clamp(80px, 6vw, 132px);
+  }
+
+  .dashboard-content {
+    width: min(1480px, calc(100% - 72px));
+  }
+}
+
+@media (min-width: 2200px) {
+  body {
+    font-size: 18px;
+  }
+
+  .landing-navigation,
+  .agent-selection-header,
+  .agent-selection-content {
+    width: min(1720px, calc(100% - 160px));
+  }
+}
+
+@media (max-width: 760px) {
+  .page-back-button {
+    min-height: 40px;
+    padding-inline: 12px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 360px) {
+  .page-back-button {
+    min-height: 38px;
+    padding-inline: 10px;
+    font-size: 12px;
+  }
+}

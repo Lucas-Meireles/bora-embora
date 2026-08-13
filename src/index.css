@@ -1,0 +1,21 @@
+@import "./styles/globals.css";
+
+
+/* Motion system: the DOM stays visible if the animation library is unavailable. */
+[data-reveal],
+[data-reveal-left],
+[data-reveal-right],
+[data-motion-title],
+[data-motion-title-word] {
+  will-change: transform, opacity;
+}
+
+[data-motion-title-word] {
+  opacity: 0;
+}
+
+html[data-motion-ready="false"] [data-motion-title-word],
+html[data-motion-ready="false"] [data-motion-title] {
+  opacity: 1;
+  transform: none;
+}

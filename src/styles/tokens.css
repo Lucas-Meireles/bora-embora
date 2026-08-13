@@ -1,0 +1,80 @@
+/* =========================================================
+   BORA EMBORA
+   DESIGN TOKENS
+========================================================= */
+
+:root {
+  --color-night: #0B1220;
+  --color-night-soft: #111A2C;
+  --color-surface: #111A2C;
+  --color-surface-soft: #172238;
+  --color-surface-hover: #1D2940;
+
+  --color-white: #F5F1E8;
+  --color-white-soft: #DDE2EA;
+  --color-muted: #A8B3C4;
+  --color-muted-dark: #7E8A9D;
+
+  --color-teal: #2DD4C7;
+  --color-teal-light: #5EEAD4;
+  --color-teal-dark: #0D9488;
+
+  --color-coral: #FF6B5B;
+  --color-coral-light: #FF8A7D;
+  --color-coral-dark: #E85D46;
+
+  --color-cyan: #5EEAD4;
+  --color-blue: #31537D;
+  --color-success: #4FD18B;
+
+  --border-subtle: rgba(168, 179, 196, 0.12);
+  --border-light: rgba(168, 179, 196, 0.20);
+
+  --radius-small: 12px;
+  --radius-medium: 18px;
+  --radius-large: 30px;
+
+  --shadow-soft: 0 25px 70px rgba(5, 10, 18, 0.28);
+  --shadow-deep: 0 35px 100px rgba(5, 10, 18, 0.48);
+
+  --transition-fast: 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 450ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-cinematic: 700ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  --font-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+[data-bora-theme="light"] {
+  color-scheme: light;
+
+  --color-night: #FAF8F3;
+  --color-night-soft: #F0ECE2;
+  --color-surface: #F0ECE2;
+  --color-surface-soft: #E8E2D6;
+  --color-surface-hover: #DED7C9;
+
+  --color-white: #1A2233;
+  --color-white-soft: #303A4C;
+  --color-muted: #5C6577;
+  --color-muted-dark: #747D8D;
+
+  --color-teal: #0D9488;
+  --color-teal-light: #0D9488;
+  --color-teal-dark: #08766D;
+
+  --color-coral: #E85D46;
+  --color-coral-light: #D94E3A;
+  --color-coral-dark: #C94835;
+
+  --color-cyan: #0D9488;
+  --border-subtle: rgba(26, 34, 51, 0.10);
+  --border-light: rgba(26, 34, 51, 0.18);
+
+  --shadow-soft: 0 25px 70px rgba(26, 34, 51, 0.10);
+  --shadow-deep: 0 35px 100px rgba(26, 34, 51, 0.18);
+}
+
+:root {
+  --color-teal-soft: rgba(45, 212, 199, 0.12);
+  --color-coral-soft: rgba(255, 107, 91, 0.12);
+}

@@ -1,0 +1,524 @@
+/* =========================================================
+   AGENT SELECTION
+   INTERAÇÃO DOS PERSONAGENS
+========================================================= */
+.agent-card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    transform 0.45s cubic-bezier(.22, 1, .36, 1),
+    border-color 0.45s ease,
+    box-shadow 0.45s ease,
+    opacity 0.45s ease;
+}
+/* =========================================================
+   AVATAR STAGE
+========================================================= */
+.agent-avatar-stage {
+  position: relative;
+  z-index: 2;
+  transform-origin: center bottom;
+  transition:
+    transform 0.65s cubic-bezier(.22, 1, .36, 1),
+    filter 0.45s ease;
+}
+/* Sombra abaixo do personagem */
+.agent-avatar-shadow {
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+  width: 42%;
+  height: 24px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.35);
+  filter: blur(14px);
+  opacity: 0.55;
+  transition:
+    transform 0.6s ease,
+    opacity 0.6s ease;
+}
+/* =========================================================
+   HOVER
+========================================================= */
+.agent-card.is-hovered {
+  transform: translateY(-8px);
+}
+.agent-card.is-hovered .agent-avatar-stage {
+  transform:
+    translateY(-8px)
+    scale(1.025);
+}
+.agent-card.is-hovered .agent-avatar-shadow {
+  transform:
+    translateX(-50%)
+    scaleX(0.85);
+  opacity: 0.35;
+}
+/* =========================================================
+   SETA
+========================================================= */
+.agent-arrow {
+  transition:
+    transform 0.4s cubic-bezier(.22, 1, .36, 1),
+    opacity 0.3s ease;
+}
+.agent-card.is-hovered .agent-arrow {
+  transform:
+    translate(4px, -4px);
+}
+/* =========================================================
+   BOTÃO
+========================================================= */
+.agent-select-button {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.35s cubic-bezier(.22, 1, .36, 1),
+    box-shadow 0.35s ease;
+}
+.agent-select-button:hover {
+  transform: translateY(-2px);
+}
+.agent-button-arrow {
+  display: inline-block;
+  transition:
+    transform 0.35s cubic-bezier(.22, 1, .36, 1);
+}
+.agent-select-button:hover .agent-button-arrow {
+  transform: translateX(5px);
+}
+/* =========================================================
+   INDICADOR DE ESCOLHA
+========================================================= */
+.agent-selected-indicator {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(-8px) scale(0.95);
+  pointer-events: none;
+  transition:
+    opacity 0.35s ease,
+    transform 0.45s cubic-bezier(.22, 1, .36, 1);
+}
+.agent-selected-indicator span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  animation: agent-pulse 1.2s infinite;
+}
+/* =========================================================
+   LU
+========================================================= */
+.agent-card-lu.is-hovered {
+  box-shadow:
+    0 25px 70px rgba(255, 105, 75, 0.12);
+}
+.agent-card-lu .agent-selected-indicator {
+  color: #ff816b;
+  background: rgba(255, 105, 75, 0.10);
+  border: 1px solid rgba(255, 105, 75, 0.22);
+}
+.agent-card-lu .agent-selected-indicator span {
+  background: #ff705d;
+  box-shadow:
+    0 0 12px rgba(255, 112, 93, 0.8);
+}
+/* =========================================================
+   THEO
+========================================================= */
+.agent-card-theo.is-hovered {
+  box-shadow:
+    0 25px 70px rgba(24, 211, 231, 0.10);
+}
+.agent-card-theo .agent-selected-indicator {
+  color: #25d4e8;
+  background: rgba(25, 211, 232, 0.08);
+  border: 1px solid rgba(25, 211, 232, 0.20);
+}
+.agent-card-theo .agent-selected-indicator span {
+  background: #25d4e8;
+  box-shadow:
+    0 0 12px rgba(37, 212, 232, 0.8);
+}
+/* =========================================================
+   SELEÇÃO
+========================================================= */
+.agent-selector.has-selection .agent-card {
+  pointer-events: none;
+}
+/* O escolhido */
+.agent-selector.has-selection .agent-card.is-selected {
+  z-index: 10;
+  transform:
+    translateY(-12px)
+    scale(1.015);
+  animation:
+    agent-selected-card 0.9s cubic-bezier(.22, 1, .36, 1)
+    forwards;
+}
+/* Avatar escolhido */
+.agent-card.is-selected .agent-avatar-stage {
+  animation:
+    agent-selected-avatar 0.9s cubic-bezier(.22, 1, .36, 1)
+    forwards;
+}
+/* Sombra */
+.agent-card.is-selected .agent-avatar-shadow {
+  animation:
+    agent-selected-shadow 0.9s ease forwards;
+}
+/* Indicador */
+.agent-card.is-selected .agent-selected-indicator {
+  opacity: 1;
+  transform:
+    translateY(0)
+    scale(1);
+}
+/* =========================================================
+   O OUTRO AGENTE SAI DE FOCO
+========================================================= */
+.agent-selector.has-selection .agent-card:not(.is-selected) {
+  opacity: 0.35;
+  transform:
+    scale(0.97);
+  filter: saturate(0.65);
+}
+/* =========================================================
+   ANIMAÇÕES
+========================================================= */
+@keyframes agent-selected-card {
+  0% {
+    transform:
+      translateY(-8px)
+      scale(1);
+  }
+  35% {
+    transform:
+      translateY(-15px)
+      scale(1.025);
+  }
+  70% {
+    transform:
+      translateY(-10px)
+      scale(1.012);
+  }
+  100% {
+    transform:
+      translateY(-12px)
+      scale(1.015);
+  }
+}
+@keyframes agent-selected-avatar {
+  0% {
+    transform:
+      translateY(-8px)
+      scale(1.025)
+      rotate(0deg);
+  }
+  25% {
+    transform:
+      translateY(-18px)
+      scale(1.055)
+      rotate(-0.6deg);
+  }
+  50% {
+    transform:
+      translateY(-13px)
+      scale(1.015)
+      rotate(0.4deg);
+  }
+  75% {
+    transform:
+      translateY(-16px)
+      scale(1.05)
+      rotate(-0.2deg);
+  }
+  100% {
+    transform:
+      translateY(-14px)
+      scale(1.015)
+      rotate(0deg);
+  }
+}
+@keyframes agent-selected-shadow {
+  0% {
+    transform:
+      translateX(-50%)
+      scaleX(0.85);
+    opacity: 0.35;
+  }
+  40% {
+    transform:
+      translateX(-50%)
+      scaleX(0.65);
+    opacity: 0.2;
+  }
+  100% {
+    transform:
+      translateX(-50%)
+      scaleX(0.75);
+    opacity: 0.25;
+  }
+}
+@keyframes agent-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 0.65;
+  }
+}
+/* =========================================================
+   ACESSIBILIDADE
+========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  .agent-card,
+  .agent-avatar-stage,
+  .agent-avatar-shadow,
+  .agent-selected-indicator,
+  .agent-select-button,
+  .agent-arrow,
+  .agent-button-arrow {
+    transition-duration: 180ms !important;
+    animation-duration: 1400ms !important;
+  }
+}
+/* =========================================================
+   AGENTES LADO A LADO
+========================================================= */
+.agent-selector {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  align-items: stretch;
+}
+@media (max-width: 800px) {
+  .agent-selector {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity:0
+  }
+  to {
+    opacity:1
+  }
+}
+@keyframes scale-in {
+  from {
+    opacity:0;
+    transform:translateY(12px) scale(.97)
+  }
+  to {
+    opacity:1;
+    transform:none
+  }
+}
+@keyframes slide-up {
+  from {
+    opacity:0;
+    transform:translateY(12px)
+  }
+  to {
+    opacity:1;
+    transform:none
+  }
+}
+@keyframes planet-spin {
+  to {
+    transform:rotate(360deg)
+  }
+}
+@keyframes twinkle {
+  0%,100% {
+    opacity:.25;
+    transform:scale(.7)
+  }
+  50% {
+    opacity:1;
+    transform:scale(1.25)
+  }
+}
+@keyframes route-travel {
+  0% {
+    transform:translateX(0);
+    opacity:0
+  }
+  20%,70% {
+    opacity:1
+  }
+  100% {
+    transform:translateX(80px);
+    opacity:0
+  }
+}
+@keyframes button-shine {
+  to {
+    transform:translateX(100%)
+  }
+}
+@keyframes rocket-loop {
+  0%,100% {
+    transform:translateX(0) rotate(-2deg)
+  }
+  50% {
+    transform:translateX(6px) translateY(-2px) rotate(-5deg)
+  }
+}
+/* =========================================================
+   AUTH BUTTON / ROCKET
+========================================================= */
+@keyframes auth-rocket-launch {
+  0% {
+    transform: translate3d(0,0,0) rotate(0deg) scale(1);
+  }
+  18% {
+    transform: translate3d(-3px,2px,0) rotate(-3deg) scale(1.02);
+  }
+  45% {
+    transform: translate3d(8px,-3px,0) rotate(-7deg) scale(1.08);
+  }
+  72% {
+    transform: translate3d(16px,-1px,0) rotate(-10deg) scale(1.04);
+  }
+  100% {
+    transform: translate3d(8px,0,0) rotate(-5deg) scale(1);
+  }
+}
+@keyframes auth-rocket-flame {
+  0%,100% {
+    opacity:.45;
+    transform: translateX(-2px) scale(.8);
+  }
+  50% {
+    opacity:1;
+    transform: translateX(-7px) scale(1.25);
+  }
+}
+@keyframes auth-button-pulse {
+  0%,100% {
+    box-shadow:0 15px 35px rgba(42,169,181,.14), 0 0 0 0 rgba(94,213,223,0);
+  }
+  50% {
+    box-shadow:0 20px 48px rgba(42,169,181,.28), 0 0 0 7px rgba(94,213,223,.05);
+  }
+}
+@keyframes auth-button-spark {
+  0% {
+    opacity:0;
+    transform:translate(0,0) scale(.5);
+  }
+  25% {
+    opacity:1;
+  }
+  100% {
+    opacity:0;
+    transform:translate(28px,-18px) scale(0);
+  }
+}
+
+/* =========================================================
+   TRANSIÇÕES GERAIS DE PÁGINA E MODAIS
+========================================================= */
+@keyframes page-rise-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes modal-rise-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 70px, 0) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes letter-drop-in {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -28px, 0) rotateX(65deg);
+  }
+
+  65% {
+    opacity: 1;
+    transform: translate3d(0, 5px, 0) rotateX(-5deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotateX(0deg);
+  }
+}
+
+@keyframes text-shimmer {
+  0%,
+  100% {
+    background-position: 100% 50%;
+  }
+
+  50% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes intro-logo-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.84) rotate(-8deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+}
+
+@keyframes intro-ring {
+  from {
+    opacity: 0;
+    transform: scale(0.55) rotate(-20deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-entrance,
+  .letter-drop span,
+  .text-shimmer {
+    animation-duration: 1400ms !important;
+  }
+}
