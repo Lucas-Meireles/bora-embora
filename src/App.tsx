@@ -216,8 +216,8 @@ function App() {
               <img className="landing-brand-logo" src={boraLogo} alt="Bora Embora" />
             </button>
             <div className="landing-links">
-              <a href="#explorar">Explorar</a>
-              <a href="#como-funciona">Como funciona</a>
+              <a href="#explorar"></a>
+              <a href="#como-funciona"></a>
             </div>
             <button className="landing-login" type="button" onClick={() => setForceHome(false)}>Voltar à minha área</button>
           </nav>
@@ -277,8 +277,8 @@ function App() {
           </button>
 
           <div className="landing-links">
-            <a href="#explorar">Explorar</a>
-            <a href="#como-funciona">Como funciona</a>
+            <a href="#explorar"></a>
+            <a href="#como-funciona"></a>
           </div>
 
           <button
